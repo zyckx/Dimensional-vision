@@ -24,7 +24,7 @@ export default defineConfig({
     proxy: {
       "/api": {
         // target: "http://localhost:8088/api",
-        target: "http://116.62.145.202:8088/api",
+        target: "http://81.68.94.247:5050/api",
         changeOrigin: true, //是否跨域
         rewrite: (path) => path.replace(/^\/api/, ""),
       },

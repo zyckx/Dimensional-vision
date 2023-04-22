@@ -28,19 +28,19 @@
           <div class="menu_item" v-for="(nav, index) in navList" :key="index">
             <h2 class="menu_item_link">
               <router-link
-                :to="nav.path"
-                :class="{ active: $route.path === nav.path }"
+                :to="nav.link"
+                :class="{ active: $route.path === nav.link }"
               >
                 <span>{{ nav.title }}</span>
               </router-link>
             </h2>
-            <div class="submenu" v-if="nav.submenu">
+            <div class="submenu" v-if="nav.son">
               <div
                 class="submenu_item"
-                v-for="(item, index) in nav.submenu"
+                v-for="(item, index) in nav.son"
                 :key="index"
               >
-                <router-link :to="item.path">
+                <router-link :to="item.link">
                   <span>{{ item.title }}</span>
                 </router-link>
               </div>
@@ -80,65 +80,20 @@
 import { useUserStore } from "../../store/UserStore";
 import { loginOut } from "../../api/User/login";
 import { delCookie } from "../../utils/handleCookie";
+import { getNav } from "../../api/text";
 const userStore = useUserStore();
 const router = useRouter();
 const MenuIsOpen = ref(false);
 const navList = ref([
   {
-    title: "首页",
-    path: "/",
-  },
-  {
     title: "图像处理",
-    path: "/",
-    submenu: [
+    link: "/",
+    son: [
       {
         title: "图像处理",
-        path: "/",
-      },
-      {
-        title: "图像处理",
-        path: "/",
-      },
-      {
-        title: "图像处理",
-        path: "/",
-      },
-      {
-        title: "图像处理",
-        path: "/",
+        link: "/",
       },
     ],
-  },
-  {
-    title: "点云处理",
-    path: "/online",
-    submenu: [
-      {
-        title: "点云处理",
-        path: "/online",
-      },
-      {
-        title: "点云处理",
-        path: "/online",
-      },
-      {
-        title: "点云处理",
-        path: "/online",
-      },
-      {
-        title: "点云处理",
-        path: "/online",
-      },
-    ],
-  },
-  {
-    title: "AI绘图",
-    path: "/discussion",
-  },
-  {
-    title: "次元社区",
-    path: "/classification",
   },
 ]);
 
@@ -148,7 +103,13 @@ const headerIsFixed = ref(false);
 router.afterEach(() => {
   MenuIsOpen.value = false;
 });
-
+const getNavLists = () => {
+  getNav().then((res) => {
+    if (res.code === 1000) {
+      navList.value = res.data;
+    }
+  });
+};
 const logOut = async () => {
   await loginOut().then((res) => {
     if (res.code === 1) {
@@ -167,6 +128,7 @@ const handleScroll = () => {
 
 onMounted(() => {
   window.addEventListener("scroll", handleScroll);
+  getNavLists();
 });
 </script>
 <style lang="less" scoped>
@@ -303,6 +265,7 @@ header {
             border-radius: 5px;
             display: none;
             background-color: #fff;
+            z-index: 999;
 
             .submenu_item {
               padding: 10px 0;

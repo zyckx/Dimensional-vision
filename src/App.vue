@@ -10,6 +10,7 @@
 </template>
 
 <script setup lang="ts">
+import Header from "./components/Header/Header.vue";
 import zhCn from "element-plus/lib/locale/lang/zh-cn";
 
 const locale = ref(zhCn);
