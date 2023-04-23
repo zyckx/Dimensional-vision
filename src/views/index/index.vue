@@ -5,11 +5,19 @@
         <Slide />
       </div>
       <div class="image-transform">
-        <div v-for="item in buttonList" :key="item.id">
-          <router-link :to="item.path">
+        <div v-for="item in buttonList" :key="item.title">
+          <router-link :to="item.iconName">
             <div class="image-transform-item">
-              <i :class="item.icon"></i>
-              <span>{{ item.title }}</span>
+              <span><i :class="item.iconName"></i>{{ item.title }}</span>
+              <div class="son-list">
+                <router-link
+                  v-for="text in item.text"
+                  :key="text"
+                  :to="item.iconName"
+                >
+                  <span>{{ text }}</span>
+                </router-link>
+              </div>
             </div>
           </router-link>
         </div>
@@ -19,48 +27,17 @@
 </template>
 
 <script setup lang="ts">
+import { getFunc } from "../../api/text";
+onMounted(() => {
+  getFunc().then((res) => {
+    buttonList.value = res.data;
+  });
+});
 const buttonList = ref([
   {
-    id: 1,
-    path: "/",
-    title: "超分辨率",
-    icon: "el-icon-s-home",
-  },
-  {
-    id: 2,
-    path: "/",
     title: "图像处理",
-    icon: "el-icon-picture-outline",
-  },
-  {
-    id: 3,
-    path: "/",
-    title: "点云处理",
-    icon: "el-icon-s-data",
-  },
-  {
-    id: 4,
-    path: "/",
-    title: "视频处理",
-    icon: "el-icon-video-camera",
-  },
-  {
-    id: 5,
-    path: "/",
-    title: "数据集",
-    icon: "el-icon-s-grid",
-  },
-  {
-    id: 6,
-    path: "/",
-    title: "论文",
-    icon: "el-icon-notebook-2",
-  },
-  {
-    id: 7,
-    path: "/",
-    title: "关于我们",
-    icon: "el-icon-s-custom",
+    text: ["超分辨率", "风格迁移"],
+    iconName: "image-processing",
   },
 ]);
 </script>
@@ -91,19 +68,41 @@ const buttonList = ref([
         display: flex;
         align-items: center;
         justify-content: center;
-        flex-direction: column;
+        text-align: center;
         cursor: pointer;
         transition: all 0.2s ease;
+        overflow: hidden;
         &:hover {
           transform: scale(1.05);
+          .son-list {
+            scale: 1;
+            transition: all 0.2s ease;
+          }
         }
         i {
           font-size: 30px;
           color: #1890ff;
         }
         span {
+          display: inline-block;
+          width: 100%;
+          text-align: center;
+          height: 100%;
           font-size: 16px;
           color: #000;
+        }
+        .son-list {
+          scale: 0;
+          width: 200px;
+          height: 100px;
+          background-color: #fff;
+          border-radius: 10px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+          cursor: pointer;
         }
       }
     }

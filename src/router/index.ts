@@ -12,6 +12,16 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("../views/Login/Login.vue"),
   },
   {
+    path: "/image-func",
+    name: "ImageFunc",
+    component: () => import("../views/ImageFunc/ImageFunc.vue"),
+  },
+  {
+    path: "/image-display",
+    name: "ImageDisplay",
+    component: () => import("../views/ImageDisplay/ImageDisplay.vue"),
+  },
+  {
     path: "/:catchAll(.*)",
     name: "404",
     component: () => import("../views/404/404.vue"),

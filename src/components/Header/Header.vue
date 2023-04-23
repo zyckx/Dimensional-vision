@@ -1,5 +1,5 @@
 <template>
-  <header :class="{ header_fixed: headerIsFixed }">
+  <header :class="{ header_fixed: headerIsFixed }" class="top">
     <div class="header_container">
       <div class="header_content">
         <div class="logo">
@@ -143,7 +143,10 @@ header {
   transition: transform 0.2s ease;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   margin-bottom: 2px;
-
+  &.top {
+    position: relative;
+    z-index: 999;
+  }
   .header_container {
     max-width: 1200px;
     padding: 0 10px;

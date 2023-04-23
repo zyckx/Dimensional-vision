@@ -5,6 +5,6 @@ export const getNav = () => {
   return http.get("/main/data/nav");
 };
 // 获取主页二维码
-export const getQrcode = () => {
+export const getFunc = () => {
   return http.get("/main/data/funcchart");
 };
