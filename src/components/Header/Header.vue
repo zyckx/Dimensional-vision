@@ -168,6 +168,7 @@ header {
           display: flex;
           align-items: center;
           height: 100%;
+          color: #409eff;
 
           img {
             width: 40px;
@@ -196,11 +197,14 @@ header {
           margin: 30px;
 
           .menu_item_link {
-            font-size: 16px;
-            color: #333;
             height: 100%;
             font-weight: 500;
             transition: all 0.3s;
+            a {
+              font-size: 20px;
+              font-weight: 400;
+              color: #409eff;
+            }
             &.login-wrap {
               position: relative;
               img {
@@ -223,7 +227,7 @@ header {
                   text-align: center;
                   cursor: pointer;
                   a {
-                    color: #333;
+                    color: #409eff;
                   }
                   &:hover {
                     background-color: #dbdbdbc6;
