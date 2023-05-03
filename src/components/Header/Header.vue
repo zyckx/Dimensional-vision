@@ -132,7 +132,6 @@ onMounted(() => {
 });
 </script>
 <style lang="less" scoped>
-@import url("../../assets/font/css.css");
 header {
   width: 100%;
   height: 60px;
