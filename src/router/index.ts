@@ -12,13 +12,19 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("../views/Login/Login.vue"),
   },
   {
-    path: "/image-func",
-    name: "ImageFunc",
+    path: "/image-processing",
+    name: "image-processing",
     component: () => import("../views/ImageFunc/ImageFunc.vue"),
   },
+
   {
-    path: "/image-display",
-    name: "ImageDisplay",
+    path: "/pointcloud",
+    name: "pointcloud",
+    component: () => import("../views/PointCloud/PointCloud.vue"),
+  },
+  {
+    path: "/ai-drawing",
+    name: "ai-drawing",
     component: () => import("../views/ImageDisplay/ImageDisplay.vue"),
   },
   {
