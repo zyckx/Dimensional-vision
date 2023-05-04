@@ -4,9 +4,9 @@
     <!-- 列 -->
     <!-- 一共有4列，每一列里的元素单独填充 -->
     <div
-      class="flex-column"
       v-for="(item, index) in allColumnData"
       :key="index"
+      class="flex-column"
     >
       <div class="flex-column-ele" v-for="curItem in item" :key="curItem.id">
         <img :src="curItem.imgUrl" />
@@ -17,13 +17,13 @@
 </template>
 
 <script lang="ts" setup>
-import { nextTick, reactive, ref, onMounted } from "vue";
 import NodeListOf from "typescript";
 type waterFallItem = {
   id: number;
   imgUrl: string;
   desc: string;
 };
+
 const columnCount = 4;
 let data = ref([
   {
@@ -31,48 +31,6 @@ let data = ref([
     imgUrl:
       "https://qcloud.dpfile.com/pc/q7QsMdJq_DS7J4xCUgesjjeicLbUbAFCPHHb8mBoN9o4jyZZRObLs5ym-WtN-3N1G45IiB1YIyNuDTtqzVRwesm_qA1Pf8rFcayTY-n-rG8.jpg",
     desc: "1折起🔥成都最大超级折扣店‼️捡相因啦",
-  },
-  {
-    id: 10,
-    imgUrl:
-      "https://qcloud.dpfile.com/pc/dHilnjl51w_qQEnsJ83shVOtIGNsQSgLBA8AUgWZrXeipuAflbCJKK6UI9lwcqKpwHHsQ-9MP97gy410T7ZcBMm_qA1Pf8rFcayTY-n-rG8.jpg",
-    desc: "成都市区｜地铁直达免费拍绣球花海 🌸好震撼",
-  },
-  {
-    id: 10,
-    imgUrl:
-      "https://qcloud.dpfile.com/pc/dHilnjl51w_qQEnsJ83shVOtIGNsQSgLBA8AUgWZrXeipuAflbCJKK6UI9lwcqKpwHHsQ-9MP97gy410T7ZcBMm_qA1Pf8rFcayTY-n-rG8.jpg",
-    desc: "成都市区｜地铁直达免费拍绣球花海 🌸好震撼",
-  },
-  {
-    id: 10,
-    imgUrl:
-      "https://qcloud.dpfile.com/pc/dHilnjl51w_qQEnsJ83shVOtIGNsQSgLBA8AUgWZrXeipuAflbCJKK6UI9lwcqKpwHHsQ-9MP97gy410T7ZcBMm_qA1Pf8rFcayTY-n-rG8.jpg",
-    desc: "成都市区｜地铁直达免费拍绣球花海 🌸好震撼",
-  },
-  {
-    id: 10,
-    imgUrl:
-      "https://qcloud.dpfile.com/pc/dHilnjl51w_qQEnsJ83shVOtIGNsQSgLBA8AUgWZrXeipuAflbCJKK6UI9lwcqKpwHHsQ-9MP97gy410T7ZcBMm_qA1Pf8rFcayTY-n-rG8.jpg",
-    desc: "成都市区｜地铁直达免费拍绣球花海 🌸好震撼",
-  },
-  {
-    id: 10,
-    imgUrl:
-      "https://qcloud.dpfile.com/pc/dHilnjl51w_qQEnsJ83shVOtIGNsQSgLBA8AUgWZrXeipuAflbCJKK6UI9lwcqKpwHHsQ-9MP97gy410T7ZcBMm_qA1Pf8rFcayTY-n-rG8.jpg",
-    desc: "成都市区｜地铁直达免费拍绣球花海 🌸好震撼",
-  },
-  {
-    id: 10,
-    imgUrl:
-      "https://qcloud.dpfile.com/pc/dHilnjl51w_qQEnsJ83shVOtIGNsQSgLBA8AUgWZrXeipuAflbCJKK6UI9lwcqKpwHHsQ-9MP97gy410T7ZcBMm_qA1Pf8rFcayTY-n-rG8.jpg",
-    desc: "成都市区｜地铁直达免费拍绣球花海 🌸好震撼",
-  },
-  {
-    id: 10,
-    imgUrl:
-      "https://qcloud.dpfile.com/pc/dHilnjl51w_qQEnsJ83shVOtIGNsQSgLBA8AUgWZrXeipuAflbCJKK6UI9lwcqKpwHHsQ-9MP97gy410T7ZcBMm_qA1Pf8rFcayTY-n-rG8.jpg",
-    desc: "成都市区｜地铁直达免费拍绣球花海 🌸好震撼",
   },
 ]);
 let allColumnData = reactive<waterFallItem[][]>(
@@ -101,8 +59,8 @@ let observerObj = new IntersectionObserver(
 let dataIndex = columnCount;
 const addPicture = () => {
   if (dataIndex >= data.value.length) {
-    alert("图片已加载完成");
-    return;
+    // alert("图片已加载完成");
+    console.log("图片已加载完成");
   }
 
   let columnArray: NodeListOf<HTMLElement> =
@@ -128,7 +86,7 @@ const addPicture = () => {
   });
 };
 
-onMounted(() => {
+watchEffect(() => {
   addPicture();
 });
 </script>

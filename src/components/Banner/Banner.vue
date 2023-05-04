@@ -92,7 +92,7 @@ const search = () => {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
 .banner-wrap {
   position: relative;
   width: 100%;

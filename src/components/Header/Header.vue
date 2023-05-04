@@ -47,6 +47,11 @@
             </div>
           </div>
           <div class="menu_item">
+            <h2 class="menu_item_link search_wrap">
+              <Search />
+            </h2>
+          </div>
+          <div class="menu_item">
             <h2 class="menu_item_link login-wrap">
               <template v-if="userStore.IsLogin">
                 <router-link to="/personal">
@@ -142,10 +147,12 @@ header {
   transition: transform 0.2s ease;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   margin-bottom: 2px;
+
   &.top {
     position: relative;
     z-index: 999;
   }
+
   .header_container {
     max-width: 1200px;
     padding: 0 10px;
@@ -173,6 +180,7 @@ header {
             width: 40px;
             height: 40px;
           }
+
           .logo-name {
             font-family: Noto Sans SC, Helvetica, sans-serif;
             font-size: 20px;
@@ -193,79 +201,59 @@ header {
         .menu_item {
           position: relative;
           line-height: 60px;
-          margin: 30px;
+          margin-right: 30px;
 
           .menu_item_link {
             height: 100%;
             font-weight: 500;
             transition: all 0.3s;
+
             a {
-              font-size: 20px;
+              font-size: 18px;
               font-weight: 400;
               color: #409eff;
             }
+
             &.login-wrap {
               position: relative;
+
               img {
                 width: 40px;
                 height: 40px;
               }
-
-              .submenu {
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100px;
-                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-                border-radius: 5px;
-                display: none;
-                background-color: #fff;
-
-                .submenu_item {
-                  padding: 10px 0;
-                  text-align: center;
-                  cursor: pointer;
-                  a {
-                    color: #409eff;
-                  }
-                  &:hover {
-                    background-color: #dbdbdbc6;
-                  }
-                }
-              }
-              &:hover {
-                .submenu {
-                  display: block;
-                }
-              }
             }
+
             a.active {
               color: #1890ff;
             }
+
             &::after {
               position: absolute;
               content: "";
               width: 0;
               height: 2px;
-              bottom: 0;
+              bottom: 2px;
               background-color: #1890ff;
               transition: all 0.3s ease-in-out;
               left: 50%;
               transform: translate(-50%, 0);
             }
+
             &:hover {
               a {
                 color: #1890ff;
               }
+
               &::after {
                 width: 100%;
               }
             }
           }
+
           .submenu {
             position: absolute;
             top: 100%;
-            left: 0;
+            left: -10px;
             width: 100px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             border-radius: 5px;
@@ -274,14 +262,35 @@ header {
             z-index: 999;
 
             .submenu_item {
-              padding: 10px 0;
               text-align: center;
               cursor: pointer;
+
               a {
+                position: relative;
                 color: #333;
+                font-size: 14px;
+                display: block;
+                line-height: 50px;
+                transition: all 0.3s;
+
+                &::after {
+                  position: absolute;
+                  content: "";
+                  left: 10px;
+                  top: 12px;
+                  width: 2px;
+                  height: 0;
+                  background-color: #1890ff;
+                  transition: all 0.3s ease-in-out;
+                }
               }
               &:hover {
-                background-color: #dbdbdbc6;
+                a {
+                  color: #1890ff;
+                  &::after {
+                    height: 26px;
+                  }
+                }
               }
             }
           }
@@ -294,102 +303,103 @@ header {
       }
     }
   }
-}
 
-.container {
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+  .container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-.label-check {
-  display: none;
-}
+  .label-check {
+    display: none;
+  }
 
-.hamburger-label {
-  width: 58px;
-  height: 30px;
-  display: block;
-  cursor: pointer;
-}
+  .hamburger-label {
+    width: 58px;
+    height: 30px;
+    display: block;
+    cursor: pointer;
+  }
 
-.hamburger-label span {
-  width: 40px;
-  height: 4px;
-  background-color: #333;
-  position: absolute;
-}
+  .hamburger-label span {
+    width: 40px;
+    height: 4px;
+    background-color: #333;
+    position: absolute;
+  }
 
-.line1 {
-  transition: all 0.3s;
-}
+  .line1 {
+    transition: all 0.3s;
+  }
 
-.line2 {
-  margin: 11px 0 0 0;
-  transition: 0.3s;
-}
+  .line2 {
+    margin: 11px 0 0 0;
+    transition: 0.3s;
+  }
 
-.line3 {
-  margin: 24px 0 0 0;
-  transition: 0.3s;
-}
+  .line3 {
+    margin: 24px 0 0 0;
+    transition: 0.3s;
+  }
 
-#label-check:checked + .hamburger-label .line1 {
-  transform: rotate(-36deg) scaleX(0.55) translate(-30px, -4.5px);
-  border-radius: 50px 50px 50px 50px;
-}
+  #label-check:checked + .hamburger-label .line1 {
+    transform: rotate(-36deg) scaleX(0.55) translate(-30px, -4.5px);
+    border-radius: 50px 50px 50px 50px;
+  }
 
-#label-check:checked + .hamburger-label .line3 {
-  transform: rotate(36deg) scaleX(0.55) translate(-30px, 4.5px);
-  border-radius: 50px 50px 50px 50px;
-}
+  #label-check:checked + .hamburger-label .line3 {
+    transform: rotate(36deg) scaleX(0.55) translate(-30px, 4.5px);
+    border-radius: 50px 50px 50px 50px;
+  }
 
-#label-check:checked + .hamburger-label .line2 {
-  border-top-left-radius: 50px;
-  border-bottom-left-radius: 50px;
-  transform: translateX(10px);
-  width: 35px;
-}
+  #label-check:checked + .hamburger-label .line2 {
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+    transform: translateX(10px);
+    width: 35px;
+  }
 
-@media screen and (max-width: 768px) {
-  header {
-    .header_container {
-      .header_content {
-        .container {
-          display: flex;
-        }
-        .menu_wrapper {
-          box-shadow: 5px 1px 10px rgba(0, 0, 0, 0.1);
-          transform: translateX(120%);
-          position: absolute;
-          top: 60px;
-          right: 0;
-          background-color: #fff;
-          flex-direction: column;
-          align-items: flex-start;
-          border-radius: 5px;
-          transition: all 0.3s ease;
-
-          &.MenuOpen {
-            transform: translateX(0);
+  @media screen and (max-width: 768px) {
+    header {
+      .header_container {
+        .header_content {
+          .container {
+            display: flex;
           }
 
-          .menu_item {
-            margin-left: 0;
+          .menu_wrapper {
+            box-shadow: 5px 1px 10px rgba(0, 0, 0, 0.1);
+            transform: translateX(120%);
+            position: absolute;
+            top: 60px;
+            right: 0;
+            background-color: #fff;
+            flex-direction: column;
+            align-items: flex-start;
+            border-radius: 5px;
+            transition: all 0.3s ease;
 
-            &:hover {
-              a {
-                color: #1890ff;
-              }
+            &.MenuOpen {
+              transform: translateX(0);
             }
 
-            .menu_item_link {
-              padding: 20px;
-              font-size: 16px;
-              color: #333;
-              font-weight: 500;
-              transition: all 0.3s;
+            .menu_item {
+              margin-left: 0;
+
+              &:hover {
+                a {
+                  color: #1890ff;
+                }
+              }
+
+              .menu_item_link {
+                padding: 20px;
+                font-size: 16px;
+                color: #333;
+                font-weight: 500;
+                transition: all 0.3s;
+              }
             }
           }
         }

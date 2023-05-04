@@ -11,6 +11,7 @@
               <span><i :class="item.iconName"></i>{{ item.title }}</span>
               <div class="son-list">
                 <router-link
+                  class="son-list-item"
                   v-for="text in item.text"
                   :key="text"
                   :to="item.iconName"
@@ -60,49 +61,77 @@ const buttonList = ref([
       flex-wrap: wrap;
       justify-content: space-between;
       .image-transform-item {
+        position: relative;
         width: 200px;
         height: 100px;
+        border-radius: 5px;
         background-color: #fff;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 10px;
         display: flex;
-        align-items: center;
         justify-content: center;
-        text-align: center;
+        align-items: center;
+        box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
         cursor: pointer;
-        transition: all 0.2s ease;
-        overflow: hidden;
-        &:hover {
-          transform: scale(1.05);
-          .son-list {
-            scale: 1;
-            transition: all 0.2s ease;
+        span {
+          position: relative;
+          z-index: 2;
+          font-size: 22px;
+          font-weight: 700;
+          color: #666;
+          i {
+            margin-right: 10px;
           }
         }
-        i {
-          font-size: 30px;
-          color: #1890ff;
-        }
-        span {
-          display: inline-block;
-          width: 100%;
-          text-align: center;
-          height: 100%;
-          font-size: 16px;
-          color: #000;
-        }
+
         .son-list {
-          scale: 0;
-          width: 200px;
-          height: 100px;
+          position: absolute;
+          top: 110%;
+          left: 0;
+          z-index: 1;
           background-color: #fff;
-          border-radius: 10px;
-          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+          border-radius: 5px;
           display: flex;
-          align-items: center;
+
+          flex-wrap: wrap;
           justify-content: center;
-          flex-direction: column;
-          cursor: pointer;
+          align-items: center;
+          text-align: center;
+          transition: all 0.3s ease-in-out;
+          scale: 0;
+          a {
+            width: 150px;
+            height: 40px;
+            margin: 10px;
+            background: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            scale: 0;
+            transform: translateY(0);
+            &:hover {
+              background-color: #1890ff;
+              span {
+                color: #fff;
+              }
+            }
+            span {
+              text-align: center;
+              font-size: 14px;
+              color: #666;
+              cursor: pointer;
+            }
+          }
+        }
+        &:hover {
+          .son-list {
+            scale: 1;
+            a {
+              // transform: translateY(114px);
+              scale: 1;
+            }
+          }
         }
       }
     }

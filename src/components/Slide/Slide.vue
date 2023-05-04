@@ -17,14 +17,14 @@ import { getSwiper } from "../../api/images";
 const swiperList = reactive({
   data: [
     {
-      image: "https://img.yzcdn.cn/vant/apple-1.jpg",
-      title: "标题1",
+      image: "https://s1.ax1x.com/2023/05/04/p9tvKQf.jpg",
+      title: "首图",
     },
   ],
 });
 const getSwiperList = async () => {
   const res = await getSwiper();
-  swiperList.data = res.data;
+  swiperList.data.push(...res.data);
 };
 onMounted(() => {
   getSwiperList();

@@ -176,7 +176,7 @@
 </template>
 <script setup lang="ts"></script>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
 .algorithm-wrap {
   width: 1400px;
   margin: 0 auto;
