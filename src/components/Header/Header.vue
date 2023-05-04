@@ -154,7 +154,7 @@ header {
   }
 
   .header_container {
-    max-width: 1200px;
+    max-width: 1400px;
     padding: 0 10px;
     height: 100%;
     margin: 0 auto;
@@ -182,8 +182,11 @@ header {
           }
 
           .logo-name {
+            margin-left: 20px;
             font-family: Noto Sans SC, Helvetica, sans-serif;
-            font-size: 20px;
+            font-size: 22px;
+            font-weight: 700;
+            white-space: nowrap;
           }
         }
       }
@@ -201,8 +204,12 @@ header {
         .menu_item {
           position: relative;
           line-height: 60px;
-          margin-right: 30px;
+          margin-right: 60px;
+          white-space: nowrap;
 
+          // &:nth-child(5) {
+          //   margin-left: 400px;
+          // }
           .menu_item_link {
             height: 100%;
             font-weight: 500;

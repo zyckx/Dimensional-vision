@@ -1,7 +1,10 @@
 .DS_Store
+# dependencies
 node_modules
+# build files
 /dist
-
+# 忽略zip文件
+*.zip
 
 # local env files
 .env.local
