@@ -4,23 +4,23 @@
       <span class="select-title">算法商城</span>
       <ul>
         <li class="active">
-          <i class="fa fa-search"></i>
+          <i class="fa"></i>
           全部算法
         </li>
         <li>
-          <i class="fa fa-search"></i>
+          <i class=""></i>
           超分辨率
         </li>
         <li>
-          <i class="fa fa-search"></i>
+          <i class=""></i>
           图像处理
         </li>
         <li>
-          <i class="fa fa-search"></i>
+          <i class=""></i>
           点云处理
         </li>
         <li>
-          <i class="fa fa-search"></i>
+          <i class=""></i>
           视频处理
         </li>
       </ul>
