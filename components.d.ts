@@ -12,6 +12,7 @@ declare module "@vue/runtime-core" {
     AlgorithmDisplay: typeof import("./src/components/AlgorithmDisplay/AlgorithmDisplay.vue")["default"];
     BackTop: typeof import("./src/components/BackTop/BackTop.vue")["default"];
     Banner: typeof import("./src/components/Banner/Banner.vue")["default"];
+    Contributor: typeof import("./src/components/Contributor/Contributor.vue")["default"];
     ElBacktop: typeof import("element-plus/es")["ElBacktop"];
     ElButton: typeof import("element-plus/es")["ElButton"];
     ElCard: typeof import("element-plus/es")["ElCard"];
