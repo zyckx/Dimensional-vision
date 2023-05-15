@@ -4,6 +4,7 @@
     <ElConfigProvider :locale="locale">
       <router-view />
     </ElConfigProvider>
+    <Contributor />
   </div>
   <Footer />
   <BackTop />
