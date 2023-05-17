@@ -20,7 +20,7 @@
 	</div>
 </template>
 
-<script lang="ts" setup>
+<script setup lang="ts">
 import { nextTick, reactive, ref, onMounted } from 'vue'
 import NodeListOf from 'typescript'
 type waterFallItem = {

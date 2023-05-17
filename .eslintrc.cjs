@@ -10,9 +10,9 @@ module.exports = {
 		'eslint:recommended',
 		'plugin:vue/vue3-essential',
 		'plugin:@typescript-eslint/recommended',
+		// 'prettier/@typescript-eslint',
 		'prettier',
 		// 'plugin:prettier/recommended',
-		// 'prettier/@typescript-eslint',
 	],
 	parser: 'vue-eslint-parser', // 指定要使用的解析器
 	// 给解析器传入一些其他的配置参数
