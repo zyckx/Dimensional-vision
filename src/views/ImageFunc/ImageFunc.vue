@@ -8,6 +8,9 @@
 		</div>
 	</div>
 </template>
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const arrt = useAttrs()
+console.log(arrt)
+</script>
 
 <style lang="less" scoped></style>
