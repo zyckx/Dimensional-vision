@@ -49,7 +49,6 @@ const buttonList = ref([
 <style scoped lang="less">
 .index {
 	margin-top: 60px;
-
 	width: 100%;
 	background-color: #fff;
 	// 两两布局

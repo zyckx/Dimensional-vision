@@ -1,4 +1,6 @@
 <template>
+	<ImageOption />
+	<div>一键训练自己想要的模型</div>
 	<!-- 行 -->
 	<div class="flex-row">
 		<!-- 列 -->

@@ -18,7 +18,6 @@
 						placeholder="请选择活动区域"
 					></el-input>
 				</el-form-item>
-
 				<el-form-item label="分辨率">
 					<!-- 图像分辨率 -->
 				</el-form-item>
@@ -55,7 +54,7 @@ const generateOptions = reactive({
 	},
 })
 const result = reactive({
-	src: '',
+	src: 'src/assets/img/节点管理.png',
 })
 const onSubmit = () => {
 	console.log(generateOptions)
@@ -64,8 +63,44 @@ const onSubmit = () => {
 
 <style lang="less" scoped>
 .ai-option {
-	width: 100%;
+	width: 1400px;
+	margin: 50px auto;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
 	height: 600px;
-	background: red;
+	.option-wrap {
+		width: 600px;
+		height: 100%;
+		padding: 20px;
+		background: #fff;
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+		border-radius: 20px;
+		.option-title {
+			width: 100%;
+			height: 200px;
+			.title {
+				color: #333;
+				font-size: 22px;
+				font-weight: 700;
+			}
+			.desc {
+				color: rgba(0, 0, 0, 0.6);
+				font-size: 13px;
+			}
+		}
+	}
+	.result-image {
+		width: 600px;
+		height: 500px;
+		padding: 20px;
+		background: #fff;
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+		border-radius: 20px;
+		img {
+			width: 100%;
+			height: 100%;
+		}
+	}
 }
 </style>

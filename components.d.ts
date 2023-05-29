@@ -22,6 +22,7 @@ declare module '@vue/runtime-core' {
 		ElConfigProvider: typeof import('element-plus/es')['ElConfigProvider']
 		ElForm: typeof import('element-plus/es')['ElForm']
 		ElFormItem: typeof import('element-plus/es')['ElFormItem']
+		ElImage: typeof import('element-plus/es')['ElImage']
 		ElInput: typeof import('element-plus/es')['ElInput']
 		Footer: typeof import('./src/components/Footer/Footer.vue')['default']
 		Header: typeof import('./src/components/Header/Header.vue')['default']
