@@ -1,5 +1,5 @@
 <template>
-	<div> 图像风格迁移 </div>
+	<div> StyleTransfer </div>
 </template>
 <script setup lang="ts"></script>
 

@@ -13,19 +13,68 @@ const routes: Array<RouteRecordRaw> = [
 	},
 	{
 		path: '/image-processing',
-		name: 'image-processing',
+		name: '图像处理',
 		component: () => import('../views/ImageFunc/ImageFunc.vue'),
+		children: [
+			{
+				path: '',
+				name: '',
+				component: () => import('../views/ImageFunc/Funcindex.vue'),
+			},
+			{
+				path: 'super-resolution',
+				name: '超分辨率',
+				component: () =>
+					import('../views/ImageFunc/SuperResolution.vue'),
+			},
+			{
+				path: 'style-transfer',
+				name: '风格迁移',
+				component: () => import('../views/ImageFunc/StyleTransfer.vue'),
+			},
+		],
 	},
 
 	{
 		path: '/pointcloud',
 		name: 'pointcloud',
 		component: () => import('../views/PointCloud/PointCloud.vue'),
+		children: [
+			{
+				path: '',
+				name: '',
+				component: () =>
+					import('../views/PointCloud/PointCloudIndex.vue'),
+			},
+			{
+				path: 'td-reconstruction',
+				name: 'td-reconstruction',
+				component: () =>
+					import('../views/PointCloud/TDReconstruction.vue'),
+			},
+		],
 	},
 	{
 		path: '/ai-drawing',
 		name: 'ai-drawing',
 		component: () => import('../views/ImageDisplay/ImageDisplay.vue'),
+		children: [
+			{
+				path: '',
+				name: '',
+				component: () => '../views/ImageDisplay/AiDrawIndex.vue',
+			},
+			{
+				path: 'text',
+				name: 'text',
+				component: () => import('../views/ImageDisplay/AIText.vue'),
+			},
+			{
+				path: 'base',
+				name: 'base',
+				component: () => import('../views/ImageDisplay/AiDrawBase.vue'),
+			},
+		],
 	},
 	{
 		path: '/:catchAll(.*)',

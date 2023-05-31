@@ -1,5 +1,5 @@
 <template>
-	<div> 超分辨率 </div>
+	<div> TdReconstruction </div>
 </template>
 <script setup lang="ts"></script>
 

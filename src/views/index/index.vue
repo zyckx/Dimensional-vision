@@ -28,6 +28,7 @@
 			</div>
 		</div>
 	</section>
+	<Contributor />
 </template>
 
 <script setup lang="ts">
