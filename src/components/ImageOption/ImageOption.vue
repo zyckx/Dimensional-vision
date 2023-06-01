@@ -12,17 +12,41 @@
 						type="textarea"
 					></el-input>
 				</el-form-item>
-				<el-form-item label="反向描述">
+				<el-form-item label="反向描述(可选)">
 					<el-input
 						v-model="generateOptions.ReverseDescription"
 						placeholder="请选择活动区域"
 					></el-input>
 				</el-form-item>
-				<el-form-item label="分辨率">
+				<el-form-item label="生产分辨率">
 					<!-- 图像分辨率 -->
+					<span>W横向</span>
+					<el-select
+						v-model="generateOptions.ImageInfo.width"
+						placeholder="请选择活动区域"
+					>
+						<el-option
+							v-for="item in [128, 256, 512, 1024]"
+							:key="item"
+							:label="item"
+							:value="item"
+						></el-option>
+					</el-select>
+					<span>H纵向</span>
+					<el-select
+						v-model="generateOptions.ImageInfo.height"
+						placeholder="请选择活动区域"
+					>
+						<el-option
+							v-for="item in [128, 256, 512, 1024]"
+							:key="item"
+							:label="item"
+							:value="item"
+						></el-option>
+					</el-select>
 				</el-form-item>
 
-				<el-form-item>
+				<el-form-item class="btn-wrap">
 					<el-button type="primary" @click="onSubmit"
 						>立即创建</el-button
 					>
@@ -39,12 +63,21 @@
 					</div>
 				</template>
 			</el-image>
+			<div class="more-wrap">
+				<router-link to="/image-processing/super-resolution">
+					<el-button type="primary">Go超分辨率</el-button>
+				</router-link>
+
+				<el-button type="success" @click="downloadImage"
+					>下载</el-button
+				>
+			</div>
 		</div>
 	</div>
 </template>
 <script setup lang="ts">
-const title = 'AI选项'
-const desc = 'AI选项描述'
+const title = 'cyAnimeV1.0'
+const desc = '动漫人物生成模型'
 const generateOptions = reactive({
 	TextDescription: '',
 	ReverseDescription: '',
@@ -54,10 +87,17 @@ const generateOptions = reactive({
 	},
 })
 const result = reactive({
-	src: 'src/assets/img/节点管理.png',
+	src: 'src/assets/img/index.png',
 })
 const onSubmit = () => {
 	console.log(generateOptions)
+}
+const downloadImage = () => {
+	// 下载图片
+	const link = document.createElement('a')
+	link.download = 'cyAnimeV1.0.png'
+	link.href = result.src
+	link.click()
 }
 </script>
 
@@ -79,6 +119,7 @@ const onSubmit = () => {
 		.option-title {
 			width: 100%;
 			height: 200px;
+			text-align: center;
 			.title {
 				color: #333;
 				font-size: 22px;
@@ -88,6 +129,9 @@ const onSubmit = () => {
 				color: rgba(0, 0, 0, 0.6);
 				font-size: 13px;
 			}
+		}
+		.btn-wrap {
+			margin-top: 50px;
 		}
 	}
 	.result-image {
@@ -100,6 +144,11 @@ const onSubmit = () => {
 		img {
 			width: 100%;
 			height: 100%;
+		}
+		.more-wrap {
+			display: flex;
+			justify-content: space-around;
+			margin-top: 100px;
 		}
 	}
 }

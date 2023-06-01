@@ -1,6 +1,6 @@
 <template>
 	<ImageOption />
-	<div>一键训练自己想要的模型</div>
+	<div class="ai-title">一键训练自己想要的模型</div>
 	<!-- 行 -->
 	<div class="flex-row">
 		<!-- 列 -->
@@ -131,6 +131,11 @@ onMounted(() => {
 </script>
 
 <style lang="less" scoped>
+.ai-title {
+	font-size: 20px;
+	font-weight: bold;
+	margin: 20px 0;
+}
 .flex-row {
 	display: flex;
 	flex-direction: row;

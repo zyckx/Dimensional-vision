@@ -25,24 +25,28 @@
 			</el-card>
 		</el-col>
 		<el-col :span="12">
-			<el-card>
+			<el-card class="select-wrap">
 				<!-- 图片预览 -->
 				<template #header>
 					<span>请选择提升倍数</span>
 				</template>
-				<el-radio-group v-model="radio" size="small">
-					<el-radio-button label="1">1</el-radio-button>
-					<el-radio-button label="2">2</el-radio-button>
-					<el-radio-button label="3">3</el-radio-button>
-					<el-radio-button label="4">4</el-radio-button>
-				</el-radio-group>
-				<el-button
-					type="primary"
-					@click="superResolution"
-					:disabled="imgUrl === ''"
-				>
-					提升
-				</el-button>
+				<div class="select-option">
+					<el-radio-group v-model="radio" size="small">
+						<el-radio-button label="1">1</el-radio-button>
+						<el-radio-button label="2">2</el-radio-button>
+						<el-radio-button label="3">3</el-radio-button>
+						<el-radio-button label="4">4</el-radio-button>
+					</el-radio-group>
+				</div>
+				<div class="btn-wrap">
+					<el-button
+						type="primary"
+						@click="superResolution"
+						:disabled="imgUrl === ''"
+					>
+						提升
+					</el-button>
+				</div>
 			</el-card>
 		</el-col>
 	</el-row>
@@ -50,11 +54,10 @@
 </template>
 <script setup lang="ts">
 const imgUrl = ref('')
-const imgUrlList = ref([])
+// const imgUrlList = ref([])
 const radio = ref('1')
 const handleAvatarSuccess = (res: any, file: any) => {
 	imgUrl.value = URL.createObjectURL(file.raw)
-
 	// imgUrlList.value.push(URL.createObjectURL(file.raw))
 	// 类型“string”的参数不能赋给类型“never”的参数。
 }
@@ -80,16 +83,26 @@ const beforeAvatarUpload = (file: any) => {
 .upload-wrap {
 	margin: 30px;
 	height: 600px;
-	.el-upload {
-		border: 1px dashed #409eff;
+	//改变upload大小
+	:deep .el-upload-dragger {
+		height: 500px;
 	}
-	.el-upload__text {
-		color: #409eff;
+}
+.select-wrap {
+	position: relative;
+	margin: 30px;
+	height: 600px;
+	.select-option {
+		margin: 30px;
+		//改变radio大小
+		:deep .el-radio-button {
+			margin: 20px;
+		}
 	}
-	//调整upload组件的大小
-	.avatar-uploader {
-		width: 200px;
-		height: 400px;
+	.btn-wrap {
+		position: absolute;
+		bottom: 30px;
+		right: 30px;
 	}
 }
 </style>

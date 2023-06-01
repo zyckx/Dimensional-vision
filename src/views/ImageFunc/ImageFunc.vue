@@ -12,7 +12,7 @@ console.log(arrt)
 <style lang="less" scoped>
 .ImageFunc-wrap {
 	width: 100%;
-	height: 600px;
+	// height: 600px;
 	padding: 20px;
 	background-color: #fff;
 	display: flex;

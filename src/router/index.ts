@@ -50,19 +50,19 @@ const routes: Array<RouteRecordRaw> = [
 				path: 'td-reconstruction',
 				name: 'td-reconstruction',
 				component: () =>
-					import('../views/PointCloud/TDReconstruction.vue'),
+					import('../views/PointCloud/TdReconstruction.vue'),
 			},
 		],
 	},
 	{
 		path: '/ai-drawing',
-		name: 'ai-drawing',
+		name: 'AI绘图',
 		component: () => import('../views/ImageDisplay/ImageDisplay.vue'),
 		children: [
 			{
 				path: '',
-				name: '',
-				component: () => '../views/ImageDisplay/AiDrawIndex.vue',
+				name: 'cyAnime',
+				component: () => import('../views/ImageDisplay/cyAnime.vue'),
 			},
 			{
 				path: 'text',
