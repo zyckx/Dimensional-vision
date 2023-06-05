@@ -15,6 +15,7 @@ export const request = <T = any>(config: AxiosRequestConfig): Promise<T> => {
 			})
 	})
 }
+
 const http = {
 	get<T = any>(
 		url: string,

@@ -1,13 +1,13 @@
 import http from '../../axios'
 import type { Response } from '../../axios'
-export const login = (data: any, params: any) => {
+import axios from 'axios'
+export const login = (data: any) => {
 	//传递多个params参数
-	return http.post<Response>('/login', data, { params })
+	// return http.post<Response>('/users/login', data, { params })
+	return axios.post('/users/login', { ...data }, { baseURL: '/login' })
 }
 export const getCaptcha = async () => {
-	//设置请求图片的header
-	const imgResponse = await http.get('/getCode', {}, { responseType: 'blob' })
-	return URL.createObjectURL(imgResponse)
+	return axios.get('/users/login/captcha', { baseURL: '/login' })
 }
 export const loginOut = () => {
 	return http.get<Response>('/logout')

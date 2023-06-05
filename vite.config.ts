@@ -28,11 +28,10 @@ export default defineConfig({
 				changeOrigin: true, //是否跨域
 				rewrite: (path) => path.replace(/^\/api/, ''),
 			},
-			'/baidu': {
-				// target: 'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su',
-				target: 'https://www.baidu.com/sugrec',
+			'/login': {
+				target: 'http://localhost:3000/api',
 				changeOrigin: true, //是否跨域
-				rewrite: (path) => path.replace(/^\/baidu/, ''),
+				rewrite: (path) => path.replace(/^\/login/, ''),
 			},
 		},
 	},

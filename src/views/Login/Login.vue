@@ -28,7 +28,9 @@
 					prop="captcha"
 					class="captcha-wrap"
 				>
-					<img @click="refreshImg" :src="captchaImg" alt="" />
+					<span v-html="captchaImg" style="width: 140px"></span>
+					<!-- 显示svg图片 -->
+
 					<el-input
 						v-model.trim="loginForm.extraInfo.code"
 						placeholder="请输入验证码"
@@ -64,12 +66,6 @@
 						placeholder="请输入用户名"
 					></el-input>
 				</el-form-item>
-				<el-form-item label="邮箱" prop="email">
-					<el-input
-						v-model.trim="registerForm.email"
-						placeholder="请输入邮箱"
-					></el-input>
-				</el-form-item>
 				<el-form-item label="密码" prop="password">
 					<el-input
 						v-model.trim="registerForm.password"
@@ -98,18 +94,18 @@
 </template>
 
 <script lang="ts" setup>
-import { ElNotification, FormInstance, FormRules } from 'element-plus'
+import { FormInstance, FormRules } from 'element-plus'
 import { reactive, ref } from 'vue'
 import { login, getCaptcha } from '../../api/User/login'
 import { register } from '../../api/User/Register'
 import router from '../../router'
 import { useUserStore } from '../../store/UserStore'
 const userStore = useUserStore()
-const isRegister = ref(true)
+const isRegister = ref(false)
 const loginFormRef = ref<FormInstance>()
 const registerFormRef = ref<FormInstance>()
 let captchaImg = ref('')
-const loginForm = ref({
+const loginForm = reactive({
 	userInfo: {
 		username: '',
 		password: '',
@@ -120,9 +116,7 @@ const loginForm = ref({
 	},
 })
 const refreshImg = () => {
-	getCaptcha().then((res) => {
-		captchaImg.value = res
-	})
+	getCaptcha()
 }
 interface IRegisterForm {
 	username: string
@@ -138,8 +132,9 @@ const registerForm = ref<IRegisterForm>({
 	confirmPassword: '',
 })
 onMounted(() => {
-	getCaptcha().then((res) => {
-		captchaImg.value = res
+	getCaptcha().then((res: any) => {
+		console.log(res)
+		captchaImg.value = res.data
 	})
 })
 const loginRules = reactive<FormRules>({
@@ -176,26 +171,24 @@ const loginFormSubmit = async (formEl: FormInstance | undefined) => {
 
 	await formEl.validate((valid, fields) => {
 		if (valid) {
-			login(
-				JSON.stringify(loginForm.value.userInfo),
-				loginForm.value.extraInfo
-			).then((res) => {
+			login(loginForm.userInfo).then((res) => {
 				//同时传递query参数和params参数
-				if (res.code === 1) {
+				console.log(res)
+
+				if (res.data.code === 200) {
 					ElMessage({
 						message: '登录成功',
 						type: 'success',
 					})
 					userStore.userInfo.avatar = 'src/assets/logo.png'
-					userStore.userInfo.username =
-						loginForm.value.userInfo.username
+					userStore.userInfo.username = loginForm.userInfo.username
 					userStore.userInfo.email = 'admin@test.com'
 
 					userStore.IsLogin = true
 					router.push('/')
 				} else {
 					ElMessage({
-						message: res.msg,
+						message: res.data.msg,
 						type: 'error',
 					})
 				}
@@ -213,17 +206,17 @@ const registerFormSubmit = async (formEl: FormInstance | undefined) => {
 			// 删除confirmPassword
 			delete registerForm.value.confirmPassword
 			console.log(registerForm)
-			register(registerForm.value).then((res) => {
-				if (res.code === 1) {
+			register(registerForm.value).then((res: any) => {
+				if (res.data.code === 200) {
 					ElNotification({
 						title: '注册成功',
-						message: '请查收邮件激活账号',
+						message: '请查登录',
 						type: 'success',
 					})
 					isRegister.value = false
 				} else {
 					ElMessage({
-						message: res.msg,
+						message: res.data.msg,
 						type: 'error',
 					})
 				}
@@ -243,7 +236,7 @@ const registerFormSubmit = async (formEl: FormInstance | undefined) => {
 	justify-content: center;
 	.login-card {
 		width: 400px;
-		height: 300px;
+		height: 360px;
 		padding: 5px 20px 20px 20px;
 		border-radius: 10px;
 

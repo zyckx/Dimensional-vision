@@ -2,27 +2,22 @@
 	<!--两栏布局  -->
 	<el-row>
 		<el-col :span="12">
-			<el-card class="upload-wrap">
-				<!-- 拖拽上传图片 -->
-				<template #header>
-					<span>原图</span>
-				</template>
-				<el-upload
-					class="upload-demo"
-					drag
-					action="https://jsonplaceholder.typicode.com/posts/"
-					:show-file-list="false"
-					:on-success="handleAvatarSuccess"
-					:before-upload="beforeAvatarUpload"
-					:class="['avatar-uploader', 'avatar-uploader--drag']"
-				>
-					<i class="el-icon-upload"></i>
-					<div class="el-upload__text">
-						Drag here or <em>click to upload</em>
-					</div>
-					<template #tip> Only support jpg/png files </template>
-				</el-upload>
-			</el-card>
+			<!-- 文件上传 -->
+			<div class="upload-wrap">
+				<input
+					type="file"
+					accept="image/*"
+					ref="fileInput"
+					@change="onFileChange"
+				/>
+				<el-image :src="uploadUrl">
+					<template #placeholder>
+						<div class="image-slot"
+							>Loading<span class="dot">...</span></div
+						>
+					</template>
+				</el-image>
+			</div>
 		</el-col>
 		<el-col :span="12">
 			<el-card class="select-wrap">
@@ -38,11 +33,20 @@
 						<el-radio-button label="4">4</el-radio-button>
 					</el-radio-group>
 				</div>
+				<div class="result-wrap">
+					<el-image :src="imgUrl">
+						<template #placeholder>
+							<div class="image-slot"
+								>Loading<span class="dot">...</span></div
+							>
+						</template>
+					</el-image>
+				</div>
 				<div class="btn-wrap">
 					<el-button
 						type="primary"
-						@click="superResolution"
-						:disabled="imgUrl === ''"
+						@click="onSuperResolution"
+						:disabled="radio === ''"
 					>
 						提升
 					</el-button>
@@ -53,29 +57,50 @@
 	<!-- 两栏布局 -->
 </template>
 <script setup lang="ts">
-const imgUrl = ref('')
-// const imgUrlList = ref([])
-const radio = ref('1')
-const handleAvatarSuccess = (res: any, file: any) => {
-	imgUrl.value = URL.createObjectURL(file.raw)
-	// imgUrlList.value.push(URL.createObjectURL(file.raw))
-	// 类型“string”的参数不能赋给类型“never”的参数。
-}
-const superResolution = () => {
-	console.log('superResolution')
-}
-const beforeAvatarUpload = (file: any) => {
-	const isJPG = file.type === 'image/jpeg'
-	const isPNG = file.type === 'image/png'
-	const isLt2M = file.size / 1024 / 1024 < 2
+import { superResolution } from '../../api/baseFunc'
+const uploadUrl = ref('')
 
-	if (!isJPG && !isPNG) {
-		ElMessage.error('上传头像图片只能是 JPG/PNG 格式!')
+const formData = ref(new FormData())
+const onFileChange = (e: Event) => {
+	const target = e.target as HTMLInputElement
+	const file = target.files?.[0]
+	console.log(file)
+
+	if (!file) return
+	if (file) {
+		formData.value.append('content', file)
+		const reader = new FileReader()
+		reader.readAsDataURL(file)
+		reader.onload = () => {
+			uploadUrl.value = reader.result as string
+		}
 	}
-	if (!isLt2M) {
-		ElMessage.error('上传头像图片大小不能超过 2MB!')
-	}
-	return (isJPG || isPNG) && isLt2M
+}
+const imgUrl = ref('')
+const radio = ref('1')
+const onSuperResolution = () => {
+	ElMessage({
+		message: '正在提升中，请稍后',
+		type: 'info',
+		duration: 0,
+	})
+	superResolution(formData).then((res) => {
+		console.log(formData)
+		if (res.data.code === 200) {
+			imgUrl.value = res.data.data
+			ElMessage.closeAll()
+			ElMessage({
+				message: '提升成功',
+				type: 'success',
+				duration: 1000,
+			})
+		} else {
+			ElMessage({
+				message: '提升失败',
+				type: 'error',
+			})
+		}
+	})
 }
 </script>
 
@@ -83,10 +108,6 @@ const beforeAvatarUpload = (file: any) => {
 .upload-wrap {
 	margin: 30px;
 	height: 600px;
-	//改变upload大小
-	:deep .el-upload-dragger {
-		height: 500px;
-	}
 }
 .select-wrap {
 	position: relative;

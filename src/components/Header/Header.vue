@@ -120,14 +120,15 @@ const getNavLists = () => {
 	})
 }
 const logOut = async () => {
-	await loginOut().then((res) => {
-		if (res.code === 1) {
-			ElMessage.success('退出成功')
-			router.push('/login')
-			userStore.loginOut()
-			delCookie('ticket')
-		}
-	})
+	// await loginOut().then((res) => {
+	// 	if (res.code === 1) {
+	// 		ElMessage.success('退出成功')
+	// 		router.push('/login')
+	// 		userStore.loginOut()
+	// 		delCookie('ticket')
+	// 	}
+	// })
+	userStore.loginOut()
 }
 const handleScroll = () => {
 	const scrollTop =
